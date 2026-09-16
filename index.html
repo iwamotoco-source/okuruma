@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ドライブプラン｜町田→大山→ラウンドワン板橋→江ノ島→東京駅</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: "Hiragino Kaku Gothic ProN","Yu Gothic","Meiryo",sans-serif;
+    background:#0e1420; color:#e8edf5; line-height:1.7; padding:24px 16px 60px;
+  }
+  .wrap { max-width:960px; margin:0 auto; }
+  h1 { font-size:26px; letter-spacing:.02em; margin-bottom:6px; }
+  .sub { color:#8fa3bf; font-size:13px; margin-bottom:28px; }
+  .card {
+    background:#161f30; border:1px solid #243149; border-radius:14px;
+    padding:22px 24px; margin-bottom:22px;
+  }
+  h2 { font-size:17px; margin-bottom:16px; padding-left:11px; border-left:4px solid #4da3ff; }
+
+  /* サマリー */
+  .kpis { display:flex; flex-wrap:wrap; gap:14px; }
+  .kpi {
+    flex:1 1 150px; background:#1d2a40; border-radius:11px; padding:16px; text-align:center;
+  }
+  .kpi .lbl { font-size:12px; color:#8fa3bf; }
+  .kpi .val { font-size:28px; font-weight:700; color:#4da3ff; letter-spacing:-.01em; }
+  .kpi .val small { font-size:14px; font-weight:400; color:#c3d2e6; }
+  .kpi.warm .val { color:#ffb64d; }
+  .kpi.green .val { color:#57d9a3; }
+
+  /* ルート */
+  .leg { display:flex; gap:14px; padding:14px 0; border-bottom:1px dashed #2b3a55; }
+  .leg:last-child { border-bottom:none; }
+  .num {
+    flex:0 0 30px; height:30px; border-radius:50%; background:#4da3ff; color:#0e1420;
+    font-weight:700; display:flex; align-items:center; justify-content:center; font-size:14px;
+  }
+  .legbody { flex:1; }
+  .legttl { font-weight:700; font-size:15px; }
+  .legmeta { font-size:13px; color:#9fb2cc; margin-top:3px; }
+  .bar { height:7px; background:#4da3ff; border-radius:4px; margin-top:8px; }
+  .bar.b2 { background:#57d9a3; } .bar.b3 { background:#ffb64d; } .bar.b4 { background:#ff7d8a; }
+  .tag { display:inline-block; font-size:11px; padding:2px 8px; border-radius:20px; background:#2b3a55; color:#bcd0ea; margin-left:6px; }
+
+  table { width:100%; border-collapse:collapse; font-size:14px; }
+  th,td { padding:11px 10px; border-bottom:1px solid #2b3a55; text-align:left; }
+  th { background:#1d2a40; color:#9fb2cc; font-size:12px; font-weight:600; }
+  td.n { text-align:right; font-variant-numeric:tabular-nums; }
+  tr.total td { background:#1d2a40; font-weight:700; font-size:15px; color:#4da3ff; border-bottom:none; }
+  .muted { color:#8fa3bf; }
+
+  .split { display:flex; flex-wrap:wrap; gap:22px; }
+  .split > div { flex:1 1 300px; }
+  ul.notes { list-style:none; font-size:13px; color:#bcd0ea; }
+  ul.notes li { padding:6px 0 6px 18px; position:relative; }
+  ul.notes li:before { content:"▸"; position:absolute; left:0; color:#4da3ff; }
+  .foot { font-size:12px; color:#6f829c; text-align:center; margin-top:10px; }
+</style>
+
+  <link rel="manifest" href="/okuruma/manifest.json">
+  <meta name="theme-color" content="#0a84ff">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="車費用">
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="apple-touch-icon" href="/okuruma/icon-192.png">
+  <script>if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('/okuruma/sw.js').catch(()=>{});});}</script>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>ドライブ収支シート</h1>
+  <p class="sub">車両：マツダ フレアワゴン（平成30年式／DAA-MM53S・軽自動車）　経路：町田駅 → 大山駅 → ラウンドワン板橋 → 江ノ島 → 東京駅</p>
+
+  <div class="card">
+    <h2>総合サマリー</h2>
+    <div class="kpis">
+      <div class="kpi"><div class="lbl">総走行距離</div><div class="val">186<small> km</small></div></div>
+      <div class="kpi warm"><div class="lbl">高速代（軽・ETC）</div><div class="val">4,510<small> 円</small></div></div>
+      <div class="kpi green"><div class="lbl">ガソリン代</div><div class="val">1,580<small> 円</small></div></div>
+      <div class="kpi"><div class="lbl">実走行時間</div><div class="val">3<small>時間</small>30<small>分</small></div></div>
+      <div class="kpi warm"><div class="lbl">合計コスト</div><div class="val">6,090<small> 円</small></div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>区間別ルート（距離バーは実比率）</h2>
+
+    <div class="leg">
+      <div class="num">1</div>
+      <div class="legbody">
+        <div class="legttl">町田駅 → 大山駅（板橋区）<span class="tag">東名・首都高</span></div>
+        <div class="legmeta">約 45 km ／ 約 50 分 ／ 横浜町田IC〜首都高5号 板橋本町出口</div>
+        <div class="bar" style="width:58%"></div>
+      </div>
+    </div>
+
+    <div class="leg">
+      <div class="num">2</div>
+      <div class="legbody">
+        <div class="legttl">大山駅 → ラウンドワンスタジアム板橋店<span class="tag">一般道のみ</span></div>
+        <div class="legmeta">約 5.5 km ／ 約 15 分 ／ 板橋区相生町16-13（都営三田線 志村三丁目駅至近）</div>
+        <div class="bar b2" style="width:7%"></div>
+      </div>
+    </div>
+
+    <div class="leg">
+      <div class="num">3</div>
+      <div class="legbody">
+        <div class="legttl">ラウンドワン板橋 → 江ノ島<span class="tag">首都高・第三京浜・新湘南</span></div>
+        <div class="legmeta">約 78 km ／ 約 1 時間 10 分 ／ 板橋本町IN〜藤沢IC（江ノ島方面）</div>
+        <div class="bar b3" style="width:100%"></div>
+      </div>
+    </div>
+
+    <div class="leg">
+      <div class="num">4</div>
+      <div class="legbody">
+        <div class="legttl">江ノ島 → 東京駅<span class="tag">横浜新道・第三京浜・首都高</span></div>
+        <div class="legmeta">約 57 km ／ 約 1 時間 15 分 ／ 有料道路優先ルート</div>
+        <div class="bar b4" style="width:73%"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>高速料金の内訳</h2>
+    <table>
+      <thead>
+        <tr><th>区間</th><th class="n">軽・ETC</th><th class="n">普通車ETC</th><th class="n">普通車現金</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>① 横浜町田 → 板橋本町</td><td class="n">1,300 円</td><td class="n">1,630 円</td><td class="n">2,750 円</td></tr>
+        <tr><td>② 大山 → ラウンドワン板橋</td><td class="n">0 円</td><td class="n">0 円</td><td class="n">0 円</td></tr>
+        <tr><td>③ 板橋本町 → 藤沢</td><td class="n">1,390 円</td><td class="n">1,740 円</td><td class="n">1,880 円</td></tr>
+        <tr><td>④ 江ノ島 → 東京駅</td><td class="n">1,820 円</td><td class="n">2,270 円</td><td class="n">2,270 円</td></tr>
+        <tr class="total"><td>合計</td><td class="n">4,510 円</td><td class="n">5,640 円</td><td class="n">6,900 円</td></tr>
+      </tbody>
+    </table>
+    <ul class="notes" style="margin-top:14px">
+      <li>軽自動車は普通車料金の 0.8 倍が基本（NEXCO・首都高とも共通の車種区分）。上表の軽料金は普通車ETC額に 0.8 を掛けた概算値。</li>
+      <li>深夜 0〜4 時通行なら NEXCO 区間が 30% 引き、①③は約 1,000 円前後まで下がる。首都高は深夜割の対象外。</li>
+      <li>全区間を一般道に振ると高速代 0 円だが、所要は約 6 時間 30 分へ増加（距離は約 175 km でほぼ変わらない）。</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>燃費とガソリン代</h2>
+    <div class="split">
+      <div>
+        <table>
+          <thead><tr><th>項目</th><th class="n">数値</th></tr></thead>
+          <tbody>
+            <tr><td>カタログ燃費 JC08（2WD XG）</td><td class="n">30.0 km/L</td></tr>
+            <tr><td>カタログ燃費 JC08（2WD XS）</td><td class="n">28.2 km/L</td></tr>
+            <tr><td>カタログ燃費 JC08（4WD）</td><td class="n">26.4 km/L</td></tr>
+            <tr><td>実燃費（オーナー給油実績の平均）</td><td class="n">20.0 km/L</td></tr>
+            <tr><td>今回の想定消費量（186 km）</td><td class="n">9.3 L</td></tr>
+            <tr><td>ガソリン単価（レギュラー全国平均）</td><td class="n">170 円/L</td></tr>
+            <tr class="total"><td>ガソリン代</td><td class="n">1,580 円</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <ul class="notes">
+          <li>平成30年式は 2018年2月にモデルチェンジ。2月以降登録は MM53S 型、それ以前は旧 MM42S 型（2WD 32.0 km/L・4WD 29.0 km/L）。</li>
+          <li>車検証の「型式」欄が DAA-MM53S か DAA-MM42S かで判別できる。</li>
+          <li>燃料タンク容量 27 L のため、今回の 186 km は無給油で完走可能。満タンなら理論上 540 km 走行できる。</li>
+          <li>高速巡航主体の今回のルートは実燃費が伸びやすく、22 km/L 前後で走れば燃料代は 1,440 円程度まで下がる。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>最終コスト（1台あたり）</h2>
+    <table>
+      <tbody>
+        <tr><td>高速代（軽・ETC）</td><td class="n">4,510 円</td></tr>
+        <tr><td>ガソリン代</td><td class="n">1,580 円</td></tr>
+        <tr class="total"><td>総額</td><td class="n">6,090 円</td></tr>
+      </tbody>
+    </table>
+    <p class="muted" style="font-size:13px; margin-top:12px">
+      4 人乗車なら 1 人あたり約 1,520 円。別途、江ノ島周辺の駐車場代が 1 時間 400〜600 円（1 日最大 1,500〜2,500 円）、ラウンドワン板橋は駐車場無料。
+    </p>
+  </div>
+
+  <p class="foot">距離・料金は NAVITIME／MapFan／cars-japan の検索値および国交省の車種区分（軽=0.8）に基づく算出。実際の金額は出発時刻・IC選択・渋滞状況で変動。</p>
+
+</div>
+</body>
+</html>
